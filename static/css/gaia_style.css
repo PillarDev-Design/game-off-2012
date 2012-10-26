@@ -1,0 +1,15 @@
+/******************************************************************************\
+ * gaia_style.css                                                             *
+\******************************************************************************/
+body{
+    padding: 0;
+    margin: 0;
+    background: #666;
+}
+
+#scroller_area{
+    display: block;
+    margin: 30px auto 0;
+    border: 1px dashed #ccc;
+    background: #000;
+}
