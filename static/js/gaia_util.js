@@ -6,6 +6,12 @@
  * centralInit                                                                *
  * gameStart                                                                  *
  * gameLoop                                                                   *
+ * checkLives                                                                 *
+ * reset                                                                      *
+ * continueButton(e)                                                          *
+ * cursorPosition(x,y)                                                        *
+ * getCursorPos(e)                                                            *
+ * scoreTotal                                                                 *
 \******************************************************************************/
 
 //=======================================\\
@@ -13,8 +19,8 @@
 //=======================================\\
 var canvas,
     ctx,
-    width = 1200,
-    height = 800;
+    width = 600,
+    height = 600;
 
 var rightKey = false,
     leftKey = false,
@@ -65,20 +71,21 @@ function clearCanvas(){
 // centralInit                           \\
 //=======================================\\
 function centralInit(){
-    canvas = document.getElementById('play_area');
+
+    canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
 
     // Ship
     ship = new Image();
-    ship.src = '../img/ship.png';
+    ship.src = 'static/img/ship.png';
 
     // Enemy
     enemy = new Image();
-    enemy.src = '../img/8bit_enemy.png';
+    enemy.src = 'static/img/8bit_enemy.png';
 
     // StarField
     starfield = new Image();
-    starfield.src = '../img/starfield.jpg';
+    starfield.src = 'static/img/starfield.jpg';
 
     // Event Listeners
     document.addEventListener('keydown', keyDown, false);
@@ -116,4 +123,115 @@ function gameLoop(){
     scoreTotal();
 
     game = setTimeout(gameLoop, 1000/30);
+}
+
+//=======================================\\
+// checkLives                            \\
+//=======================================\\
+function checkLives(){
+    lives -= 1;
+    if(lives > 0){
+        reset();
+    }else if(lives === 0){
+        alive = false;
+    }
+}
+
+//=======================================\\
+// reset                                 \\
+//=======================================\\
+function reset(){
+    var enemy_reset_x = 50;
+    ship_x = (width/2) - 25, ship_y = height - 75, ship_w = 50, ship_h = 57;
+    
+    var temp_enemy_length = enemies.length;
+    for(var i=0; i < temp_enemy_length; i++){
+        enemies[i][0] = enemy_reset_x;
+        enemies[i][1] = -45;
+        enemy_reset_x = enemy_reset_x + enemy_w + 60;
+    }
+}
+
+//=======================================\\
+// continueButton(e)                     \\
+//=======================================\\
+function continueButton(e){
+    var cursorPos = getCursorPos(e);
+
+    if((cursorPos.x > (width/2) - 53) &&
+        (cursorPos.x < (width/2) + 47) &&
+        (cursorPos.y > (height/2) + 10) &&
+        (cursorPos.y < (height/2) + 50)){
+        alive = true;
+        lives = 3;
+        reset();
+        canvas.removeEventListener('click', continueButton, false);
+    }
+}
+
+//=======================================\\
+// cursorPosition(x,y)                   \\
+//=======================================\\
+function cursorPosition(x,y){
+    this.x = x;
+    this.y = y;
+}
+
+//=======================================\\
+// getCursorPos(e)                       \\
+//=======================================\\
+function getCursorPos(e){
+    var x, y;
+
+    if(e.pageX || e.pageY){
+        x = e.pageX;
+        y = e.pageY;
+    }else{
+        x = (e.clientX +
+            document.body.scrollLeft +
+            document.documentElement.scrollLeft);
+        y = (e.clientY +
+            document.body.scrollTop +
+            document.documentElement.scrollTop);
+    }
+
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+
+    var cursorPos = new cursorPosition(x, y);
+
+    return cursorPos;
+}
+
+//=======================================\\
+// scoreTotal                            \\
+//=======================================\\
+function scoreTotal(){
+    ctx.font = 'bold 20px VT323';
+    ctx.fillStyle = '#fff';
+
+    ctx.fillText('Score: ', 10, 55);
+    ctx.fillText(score, 70, 55);
+
+    ctx.fillText('Lives:', 10, 30);
+    ctx.fillText(lives, 68, 30);
+
+    if(!gameStarted){
+        ctx.font = 'bold 50px VT323';
+        ctx.fillText('Gaia', ((width/2) - 150), (height/2));
+
+        ctx.font = 'bold 20px VT323';
+        ctx.fillText('Click to Play', ((width/2) - 56), ((height/2) + 30));
+
+        ctx.fillText('User arrow keys to move', ((width/2) - 100), ((height/2) + 60));
+        ctx.fillText('Use the x key to shoot', ((width/2) - 100), ((height/2) + 90));
+    }
+
+    if(!alive){
+        ctx.fillText('Game Over!', 245, (height/2));
+        ctx.fillRect(((width/2) - 60), ((height/2) + 10), 100, 40);
+        ctx.fillStyle = '#000';
+        ctx.fillText('Continue?', 250, ((height/2) + 35));
+        canvas.addEventListener('click', continueButton, false);
+    }
 }
