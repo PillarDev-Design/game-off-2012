@@ -80,7 +80,7 @@ function keyDown(e){
 //=======================================\\
 function keyUp(e){
     if(e.keyCode === 39){ rightKey = false;
-    }else if(e.KeyCode === 37){ leftKey = false; }
+    }else if(e.keyCode === 37){ leftKey = false; }
 
     if(e.keyCode === 38){ upKey = false;
     }else if(e.keyCode === 40){ downKey = false; }
