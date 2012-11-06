@@ -14,6 +14,25 @@
  * scoreTotal                                                                 *
 \******************************************************************************/
 
+/******************************************************************************\
+ *                           FUNCTION DIRECTORY                               *
+ * -------------------------------------------------------------------------- *
+ * File Name       | Contents                                                 *
+ * ---------------------------------------------------------------------------*
+ * gaia_background | drawStarfield                                            *
+ * ---------------------------------------------------------------------------*
+ * gaia_collision  | hitTest, shipCollision                                   *
+ * ---------------------------------------------------------------------------*
+ * gaia_enemies    | moveEnemies, drawEnemies                                 *
+ * ---------------------------------------------------------------------------*
+ * gaia_player     | moveLaser, drawShip, drawLaser, keyDown(e), keyUp(e)     *
+ * ---------------------------------------------------------------------------*
+ * gaia_util       | Global Variable Declarations, clearCanvas, centralInit,  *
+ *                 | gameStart, gameLoop, checkLives, reset,                  *
+ *                 | continueButton(e), cursorPosition(x,y), getCursorPos(e), *
+ *                 | scoreTotal                                               *
+\******************************************************************************/
+
 //=======================================\\
 // Global Variable Declarations          \\
 //=======================================\\
@@ -35,8 +54,8 @@ var score = 0,
 var ship,
     ship_x = ((width / 2) - 25),
     ship_y = (height - 75),
-    ship_w = 50,
-    ship_h = 57;
+    ship_w = 57,
+    ship_h = 29;
 
 var lasers = [],
     laserTotal = 2;
@@ -77,7 +96,7 @@ function centralInit(){
 
     // Ship
     ship = new Image();
-    ship.src = 'static/img/ship.png';
+    ship.src = 'static/img/Fighter3.png';
 
     // Enemy
     enemy = new Image();
@@ -215,6 +234,12 @@ function scoreTotal(){
 
     ctx.fillText('Lives:', 10, 30);
     ctx.fillText(lives, 68, 30);
+
+    ctx.fillText('P-X: ', 10, 70);
+    ctx.fillText(ship_x, 70, 70);
+
+    ctx.fillText('P-Y: ', 10, 85);
+    ctx.fillText(ship_y, 70, 85);
 
     if(!gameStarted){
         ctx.font = 'bold 50px VT323';

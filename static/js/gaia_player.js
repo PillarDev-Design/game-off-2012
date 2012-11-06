@@ -12,8 +12,6 @@
 // moveLaser                             \\
 //=======================================\\
 function moveLaser(){
-    var temp_laser_length = lasers.length;
-
     for(var i=0; i < lasers.length; i++){
         if(lasers[i][1] > -11){
             lasers[i][1] -= 10;
