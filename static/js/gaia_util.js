@@ -65,8 +65,8 @@ var enemy,
     enemies = [],
     enemy_x = 50,
     enemy_y = -45,
-    enemy_w = 50,
-    enemy_h = 38,
+    enemy_w = 29,
+    enemy_h = 37,
     enemy_speed = 3;
 
 for(var i=0; i<enemyTotal; i=i+1){
@@ -76,8 +76,8 @@ for(var i=0; i<enemyTotal; i=i+1){
 
 var starField,
     star_X = 0,
-    star_Y = 0,
-    star_Y2 = -600;
+    star_X2 = -600,
+    star_Y = 0;
 
 //=======================================\\
 // clearCanvas                           \\
@@ -100,7 +100,7 @@ function centralInit(){
 
     // Enemy
     enemy = new Image();
-    enemy.src = 'static/img/8bit_enemy.png';
+    enemy.src = 'static/img/enemy_fighter1.png';
 
     // StarField
     starfield = new Image();

@@ -9,15 +9,15 @@
 //=======================================\\
 function drawStarfield(){
     ctx.drawImage(starfield, star_X, star_Y);
-    ctx.drawImage(starfield, star_X, star_Y2);
+    ctx.drawImage(starfield, star_X2, star_Y);
     
-    if(star_Y > 600){
-        star_Y = -599;
+    if(star_X < -600){
+        star_X = 600;
     }
-    if(star_Y2 > 600){
-        star_Y2 = -599;
+    if(star_X2 < -600){
+        star_X2 = 600;
     }
 
-    star_Y += 1;
-    star_Y2 += 1;
+    star_X -= 1;
+    star_X2 -= 1;
 }
