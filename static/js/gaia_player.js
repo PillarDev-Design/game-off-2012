@@ -13,9 +13,9 @@
 //=======================================\\
 function moveLaser(){
     for(var i=0; i < lasers.length; i++){
-        if(lasers[i][1] > -11){
-            lasers[i][1] -= 10;
-        }else if(lasers[i][1] < -10){
+        if(lasers[i][0] < 599){
+            lasers[i][0] += 10;
+        }else if(lasers[i][0] >= 600){
             lasers.splice(i, 1);
         }
     }
@@ -69,7 +69,7 @@ function keyDown(e){
     }
 
     if((e.keyCode === 88) && (lasers.length <= laserTotal)){
-        lasers.push([(ship_x + 25), (ship_y - 20), 4, 20]);
+        lasers.push([(ship_x + 50), (ship_y + 13), 20, 4]);
     }
 }
 
