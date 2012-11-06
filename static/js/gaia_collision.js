@@ -9,12 +9,10 @@
 // hitTest                               \\
 //=======================================\\
 function hitTest() {
-    var remove = false,
-        temp_laser_length = lasers.length,
-        temp_enemy_length = enemies.length;
-    
-    for (var i = 0; i < temp_laser_length; i++) {
-        for (var j = 0; j < temp_enemy_length; j++) {
+    var remove = false;
+
+    for (var i = 0; i < lasers.length; i++) {
+        for (var j = 0; j < enemies.length; j++) {
             if (lasers[i][1] <= (enemies[j][1] + enemies[j][3]) && lasers[i][0] >= enemies[j][0] && lasers[i][0] <= (enemies[j][0] + enemies[j][2])) {
                 remove = true;
                 enemies.splice(j, 1);
