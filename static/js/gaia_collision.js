@@ -17,7 +17,7 @@ function hitTest() {
                 remove = true;
                 enemies.splice(j, 1);
                 score += 10;
-                enemies.push([(Math.random() * 500) + 50, -45, enemy_w, enemy_h, enemy_speed]);
+                enemies.push([599, (Math.random() * 500) + 50, enemy_w, enemy_h, enemy_speed]);
             }
         }
         if (remove === true) {

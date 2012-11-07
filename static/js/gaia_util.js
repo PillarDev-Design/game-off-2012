@@ -63,15 +63,15 @@ var lasers = [],
 var enemy,
     enemyTotal = 5,
     enemies = [],
-    enemy_x = 50,
-    enemy_y = -45,
+    enemy_x = 599,
+    enemy_y = 50,
     enemy_w = 29,
     enemy_h = 37,
     enemy_speed = 3;
 
 for(var i=0; i<enemyTotal; i=i+1){
     enemies.push([enemy_x, enemy_y, enemy_w, enemy_h, enemy_speed]);
-    enemy_x += enemy_w + 60;
+    enemy_y += enemy_h + 60;
 }
 
 var starField,
